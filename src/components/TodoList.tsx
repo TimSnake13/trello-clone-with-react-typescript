@@ -16,15 +16,9 @@ type ACTION_TYPES =
 function reducer(state: { todos: Array<Todo> }, action: ACTION_TYPES) {
   switch (action.type) {
     case TodoAction.ADD:
-      console.log("Here is in ADD: ");
       const newTodo = new Todo(action.payload);
-      console.log(newTodo);
-      console.log("newTodo.text: " + newTodo.text);
-      console.log("Payload: " + action.payload);
       return { todos: [...state.todos, newTodo] };
     case TodoAction.REMOVE:
-      console.log("Here is in REMOVE: ");
-
       return {
         todos: state.todos.filter((todo: Todo) => todo.id !== action.payload),
       };
@@ -42,15 +36,9 @@ function reducer(state: { todos: Array<Todo> }, action: ACTION_TYPES) {
 const TodoList = () => {
   const [{ todos }, dispatch] = useReducer(reducer, { todos: [] });
 
-  const [text, setText] = useState("");
-
   function AddTodo(todo: string) {
     if (todo !== "") {
-      setText(todo);
-      console.log("text: " + todo);
-
-      dispatch({ type: TodoAction.ADD, payload: text });
-      console.log("Todos: " + todos);
+      dispatch({ type: TodoAction.ADD, payload: todo });
     }
   }
 
@@ -58,7 +46,7 @@ const TodoList = () => {
     // BUG:
     // Somehow the first todo that pass in as props is always an empty string
     // but after that, everything works just fine.
-    AddTodo("Example Todo For Testing");
+    AddTodo("Example Todo For Testing hahaha ");
   }, []);
 
   return (
@@ -67,19 +55,17 @@ const TodoList = () => {
       <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
       <AddTodoForm addTodo={AddTodo} />
       <div className="dropzone">
-        {todos.map((todo) => {
+        {todos.map((t) => (
           <div
             className="draggable"
             draggable="true"
-            key={todo.id}
-            style={{ textDecoration: todo.done ? "line-through" : "none" }}
-            onClick={() =>
-              dispatch({ type: TodoAction.TOGGLE, payload: todo.id })
-            }
+            key={t.id}
+            style={{ textDecoration: t.done ? "line-through" : "none" }}
+            onClick={() => dispatch({ type: TodoAction.TOGGLE, payload: t.id })}
           >
-            {todo.text}
-          </div>;
-        })}
+            {t.text}
+          </div>
+        ))}
       </div>
       <div className="dropzone">
         <div className="draggable">3</div>

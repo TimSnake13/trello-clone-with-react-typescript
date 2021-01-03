@@ -9,7 +9,6 @@ function App() {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <>
-      <TodoList />
       <input ref={inputRef} name="email" type="search" />
       <button
         onClick={() => {
@@ -27,10 +26,14 @@ function App() {
           <li>
             <Link to="/about">About</Link>
           </li>
+          <li>
+            <Link to="/todo">Todo</Link>
+          </li>
         </ul>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/todo" component={TodoList} />
         </Switch>
       </Router>
     </>
