@@ -2,6 +2,8 @@ import React, { useState, useReducer, useEffect } from "react";
 import { Todo } from "./types";
 import AddTodoForm from "./AddTodoForm";
 
+import ReactCursorPosition, { INTERACTIONS } from "react-cursor-position";
+
 enum TodoAction {
   ADD = "ADD",
   REMOVE = "REMOVE",
@@ -42,11 +44,66 @@ const TodoList = () => {
     }
   }
 
+  useEffect(() => {
+    const allDraggable = document.body.querySelectorAll(".draggable");
+
+    allDraggable.forEach((draggable) => {
+      draggable.addEventListener("dragstart", () => {
+        draggable.classList.add(".dragging");
+      });
+      draggable.addEventListener("dragend", () => {
+        draggable.classList.remove("dragging");
+      });
+    });
+
+    return () => {
+      // Clean up unfinish
+      // allDraggable.forEach((draggable) => {
+      //   draggable.removeEventListener("dragstart");
+      //   draggable.removeEventListener("dragend");
+      // });
+    };
+  }, [todos]);
+
+  function getDragAfterElement(
+    container: Element,
+    e: React.MouseEvent<HTMLElement>
+  ) {
+    const draggableElements = Array.prototype.slice.call(
+      container.querySelectorAll(".draggable:not(.dragging)")
+    );
+    return draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = e.clientY - box.top - box.height / 2; // Mouse Y dst to box center
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).element;
+  }
+
+  useEffect(() => {
+    const allDropzones = document.body.querySelectorAll(".dropzone");
+
+    allDropzones.forEach((dropzone) => {
+      dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+
+        // const afterElement = getDragAfterElement(dropzone, e);
+      });
+    });
+  }, []);
+
   return (
     <>
       <h3>Todos: </h3>
       <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
       <AddTodoForm addTodo={AddTodo} />
+
       <div className="dropzone">
         {todos.map((t) => (
           <div
@@ -57,6 +114,7 @@ const TodoList = () => {
             onClick={() => dispatch({ type: TodoAction.TOGGLE, payload: t.id })}
           >
             {t.text}
+            <div className="strike-through"></div>
           </div>
         ))}
       </div>
