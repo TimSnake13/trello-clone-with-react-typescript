@@ -42,13 +42,6 @@ const TodoList = () => {
     }
   }
 
-  useEffect(() => {
-    // BUG:
-    // Somehow the first todo that pass in as props is always an empty string
-    // but after that, everything works just fine.
-    AddTodo("Example Todo For Testing hahaha ");
-  }, []);
-
   return (
     <>
       <h3>Todos: </h3>
