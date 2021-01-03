@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Todo } from "./types";
 
 interface Props {
-  addTodo: (todo: Todo) => void;
+  addTodo: (todo: string) => void;
 }
 
 const AddTodoForm = (Props: Props) => {
@@ -14,9 +14,7 @@ const AddTodoForm = (Props: Props) => {
 
   const handleAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const todo = new Todo(newTodo);
-    console.log("New Todo: " + todo.text);
-    Props.addTodo(todo);
+    Props.addTodo(newTodo);
     setNewTodo("");
   };
 
