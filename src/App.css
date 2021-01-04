@@ -85,6 +85,9 @@ button:hover {
   top: 50%;
   transition: all 0.5s ease;
 }
+.todoItem-text {
+  transition: all 0.5s ease;
+}
 
 .container {
   padding-left: 10%;

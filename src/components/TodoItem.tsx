@@ -8,6 +8,8 @@ interface Props {
 
 const TodoItem = (props: Props) => {
   const strikeThroughtEl = useRef<HTMLDivElement>(null);
+  const textEl = useRef<HTMLDivElement>(null);
+
   return (
     <div>
       <div
@@ -16,14 +18,22 @@ const TodoItem = (props: Props) => {
         onClick={() => {
           props.ToggleTodoItem(props.todoItem);
           if (strikeThroughtEl && strikeThroughtEl.current)
-            if (props.todoItem.done)
+            if (props.todoItem.done) {
               strikeThroughtEl.current.style.width = "80%";
-            else {
+            } else {
               strikeThroughtEl.current.style.width = "0%";
+            }
+          if (textEl && textEl.current)
+            if (props.todoItem.done) {
+              textEl.current.style.color = "#D1D5DB";
+            } else {
+              textEl.current.style.color = "#1F2937";
             }
         }}
       >
-        {props.todoItem.text}
+        <p className="todoItem-text" ref={textEl}>
+          {props.todoItem.text}
+        </p>
         <div className="strike-through" ref={strikeThroughtEl}></div>
       </div>
     </div>
