@@ -4,12 +4,15 @@ export class Todo {
   id: string;
   text: string;
   done: boolean;
+  dropzone: number;
 
-  constructor(props: string) {
+  constructor(prop_text: string, prop_dropzone?: number) {
     this.id = uuidv4();
-    if (props === "") this.text = "Example Todo Item";
-    else this.text = props;
+    if (prop_text === "") this.text = "Example Todo Item";
+    else this.text = prop_text;
     this.done = false;
+    if (prop_dropzone) this.dropzone = prop_dropzone;
+    else this.dropzone = 0;
   }
 }
 

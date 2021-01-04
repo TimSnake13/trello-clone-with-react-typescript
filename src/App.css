@@ -26,7 +26,7 @@ button:hover {
 
 .dropzone {
   color: white;
-  background-color: black;
+  background-color: grey;
   height: 150%;
   border: 1px solid gray;
   margin: 20px 10px;
@@ -78,6 +78,5 @@ button:hover {
   margin-left: 30px;
 }
 
-.handle {
-  cursor: move;
+.todo-list-wrapper {
 }
