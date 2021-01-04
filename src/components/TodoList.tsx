@@ -152,28 +152,30 @@ const TodoList = () => {
       <div className="scrolling-wrapper">
         <div className="flex-box">
           {dropzones.map((d) => (
-            <div className="dropzone" key={d.idx}>
-              <p>
-                {d.idx} {d.name}
-              </p>
-              {todos.map((t) =>
-                t.dropzone === d.idx ? (
-                  <div
-                    className="draggable"
-                    draggable="true"
-                    key={t.id}
-                    style={{ textDecoration: t.done ? "line-through" : "none" }}
-                    onClick={() =>
-                      dispatch({ type: TodoAction.TOGGLE, payload: t.id })
-                    }
-                  >
-                    {t.dropzone}: {t.text}
-                    <div className="strike-through"></div>
-                  </div>
-                ) : (
-                  <></>
-                )
-              )}
+            <div key={d.idx} className="dropzone-wrapper">
+              <div className="dropzone">
+                <h4 className="dropzone-title">{d.name}</h4>
+                {todos.map((t) =>
+                  t.dropzone === d.idx ? (
+                    <div
+                      className="draggable"
+                      draggable="true"
+                      key={t.id}
+                      style={{
+                        textDecoration: t.done ? "line-through" : "none",
+                      }}
+                      onClick={() => {
+                        dispatch({ type: TodoAction.TOGGLE, payload: t.id });
+                      }}
+                    >
+                      {t.text}
+                      <div className="strike-through"></div>
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                )}
+              </div>
               <AddTodoForm addTodo={AddTodo} currentDropzone={d.idx} />
             </div>
           ))}

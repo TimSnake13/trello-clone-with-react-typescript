@@ -22,10 +22,10 @@ const AddTodoForm = (Props: Props) => {
   return (
     <div>
       <form>
-        <input type="text" value={newTodo} onChange={handleChange}></input>
         <button type="submit" onClick={handleAddTodo}>
           +
         </button>
+        <input type="text" value={newTodo} onChange={handleChange}></input>
       </form>
     </div>
   );

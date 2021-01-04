@@ -12,6 +12,14 @@ a {
   color: black;
 }
 
+p {
+  line-break: normal;
+}
+
+input {
+  height: 100%;
+}
+
 ul {
   list-style: none;
 }
@@ -24,28 +32,43 @@ button:hover {
   cursor: pointer;
 }
 
-.dropzone {
-  color: white;
+.dropzone-wrapper {
   background-color: grey;
-  height: 150%;
+  color: white;
+  margin: 10px 10px 10px 0px;
+  padding: 5px 20px;
+  text-align: left;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dropzone {
+  height: 100%;
+  max-width: 700px;
   border: 1px solid gray;
-  margin: 20px 10px;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.dropzone-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 .draggable {
   border: 1px solid grey;
-  margin: 20px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   padding: 10px;
-  width: 50%;
   background: white;
   color: black;
   z-index: 2;
   cursor: move;
   position: relative;
+  border-radius: 6px;
 }
 
 .draggable.dragging {
@@ -60,6 +83,7 @@ button:hover {
   background-color: green;
   z-index: 5;
   top: 50%;
+  transition: all 0.5s ease;
 }
 
 .container {
@@ -71,10 +95,11 @@ button:hover {
 .flex-box {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
 
 .main-content-wrapper {
-  width: 700px;
+  width: 100%;
   margin-left: 30px;
 }
 
