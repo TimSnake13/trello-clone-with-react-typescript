@@ -142,14 +142,14 @@ const TodoList = () => {
         else console.log("No draggable: " + draggable);
       });
     });
-  }, []);
+  }, [dropzones]);
 
   return (
     <div>
-      <div>
-        <h3>Todos: </h3>
-        <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
-        <button onClick={() => AddDropzone()}>New List</button>
+      <h3>Todos: </h3>
+      <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
+      <button onClick={() => AddDropzone()}>New List</button>
+      <div className="scrolling-wrapper">
         <div className="flex-box">
           {dropzones.map((d) => (
             <div className="dropzone" key={d.idx}>
