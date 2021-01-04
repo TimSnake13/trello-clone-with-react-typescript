@@ -2,7 +2,9 @@ import React, { useState, useReducer, useEffect } from "react";
 import { Todo } from "./types";
 import AddTodoForm from "./AddTodoForm";
 
+import DraggableItem from "./DraggableItem";
 import ReactCursorPosition, { INTERACTIONS } from "react-cursor-position";
+import PositionLabel from "./PositionLabel";
 
 enum TodoAction {
   ADD = "ADD",
@@ -57,7 +59,7 @@ const TodoList = () => {
     });
 
     return () => {
-      // Clean up unfinish
+      // Clean up unfinished
       // allDraggable.forEach((draggable) => {
       //   draggable.removeEventListener("dragstart");
       //   draggable.removeEventListener("dragend");
@@ -98,31 +100,43 @@ const TodoList = () => {
     });
   }, []);
 
-  return (
-    <>
-      <h3>Todos: </h3>
-      <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
-      <AddTodoForm addTodo={AddTodo} />
+  //TODO: 1. react drag & drop between task container
+  //TODO: 2. Add & remove task container
+  //TODO: 3. Add some beautiful css
+  //TODO: 4. line through animation with dynamic text length
 
-      <div className="dropzone">
-        {todos.map((t) => (
-          <div
-            className="draggable"
-            draggable="true"
-            key={t.id}
-            style={{ textDecoration: t.done ? "line-through" : "none" }}
-            onClick={() => dispatch({ type: TodoAction.TOGGLE, payload: t.id })}
-          >
-            {t.text}
-            <div className="strike-through"></div>
-          </div>
-        ))}
-      </div>
-      <div className="dropzone">
-        <div className="draggable">3</div>
-        <div className="draggable">4</div>
-      </div>
-    </>
+  return (
+    <div className="todo-list-wrapper">
+      <ReactCursorPosition activationInteractionMouse={INTERACTIONS.CLICK}>
+        <PositionLabel />
+
+        <h3>Todos: </h3>
+        <button onClick={() => AddTodo("Test")}>Add a Test Todo</button>
+        <AddTodoForm addTodo={AddTodo} />
+
+        <div className="dropzone">
+          {todos.map((t) => (
+            <div
+              className="draggable"
+              draggable="true"
+              key={t.id}
+              style={{ textDecoration: t.done ? "line-through" : "none" }}
+              onClick={() =>
+                dispatch({ type: TodoAction.TOGGLE, payload: t.id })
+              }
+            >
+              {t.text}
+              <div className="strike-through"></div>
+            </div>
+          ))}
+        </div>
+        <div className="dropzone">
+          <div className="draggable">3</div>
+          <div className="draggable">4</div>
+          <DraggableItem />
+        </div>
+      </ReactCursorPosition>
+    </div>
   );
 };
 export default TodoList;

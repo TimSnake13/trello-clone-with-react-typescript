@@ -23,7 +23,7 @@ function App() {
               </li>
             </ul>
 
-            <div>
+            <div className="main-content-wrapper">
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/about" component={About} />
