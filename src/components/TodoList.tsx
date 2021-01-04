@@ -1,17 +1,7 @@
 import React, { useState, useReducer, useEffect } from "react";
-import { Todo } from "./types";
+import { Todo, ACTION_TYPES, TodoAction } from "./types";
 import AddTodoForm from "./AddTodoForm";
-
-enum TodoAction {
-  ADD = "ADD",
-  REMOVE = "REMOVE",
-  TOGGLE = "TOGGLE",
-}
-
-type ACTION_TYPES =
-  | { type: TodoAction.ADD; payload: { text: string; dropzone_idx: number } }
-  | { type: TodoAction.REMOVE; payload: string }
-  | { type: TodoAction.TOGGLE; payload: string };
+import TodoItem from "./TodoItem";
 
 function reducer(state: { todos: Array<Todo> }, action: ACTION_TYPES) {
   switch (action.type) {
@@ -144,6 +134,10 @@ const TodoList = () => {
     });
   }, [dropzones]);
 
+  const ToggleTodoItem = (t: Todo) => {
+    dispatch({ type: TodoAction.TOGGLE, payload: t.id });
+  };
+
   return (
     <div>
       <h3>Todos: </h3>
@@ -157,20 +151,11 @@ const TodoList = () => {
                 <h4 className="dropzone-title">{d.name}</h4>
                 {todos.map((t) =>
                   t.dropzone === d.idx ? (
-                    <div
-                      className="draggable"
-                      draggable="true"
+                    <TodoItem
                       key={t.id}
-                      style={{
-                        textDecoration: t.done ? "line-through" : "none",
-                      }}
-                      onClick={() => {
-                        dispatch({ type: TodoAction.TOGGLE, payload: t.id });
-                      }}
-                    >
-                      {t.text}
-                      <div className="strike-through"></div>
-                    </div>
+                      todoItem={t}
+                      ToggleTodoItem={ToggleTodoItem}
+                    />
                   ) : (
                     <></>
                   )

@@ -17,3 +17,14 @@ export class Todo {
 }
 
 export type Todos = Array<Todo>;
+
+export enum TodoAction {
+  ADD = "ADD",
+  REMOVE = "REMOVE",
+  TOGGLE = "TOGGLE",
+}
+
+export type ACTION_TYPES =
+  | { type: TodoAction.ADD; payload: { text: string; dropzone_idx: number } }
+  | { type: TodoAction.REMOVE; payload: string }
+  | { type: TodoAction.TOGGLE; payload: string };
