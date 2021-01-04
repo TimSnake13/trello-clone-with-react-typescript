@@ -73,6 +73,11 @@ const TodoList = () => {
     }
   }
 
+  const ToggleTodoItem = (t: Todo) => {
+    dispatch({ type: TodoAction.TOGGLE, payload: t.id });
+  };
+
+  /***************     Drag & Drop Functions     *****************/
   // AddEventListener to all todo item: Add and remove .dragging
   useEffect(() => {
     const allDraggable = document.body.querySelectorAll(".draggable");
@@ -133,10 +138,7 @@ const TodoList = () => {
       });
     });
   }, [dropzones]);
-
-  const ToggleTodoItem = (t: Todo) => {
-    dispatch({ type: TodoAction.TOGGLE, payload: t.id });
-  };
+  /*************** End Drag & Drop Functions  *****************/
 
   return (
     <div>
