@@ -12,14 +12,12 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.7",
     "@types/uuid": "^8.3.0",
-    "easy-peasy": "^4.0.1",
     "react": "^17.0.1",
-    "react-cursor-position": "^3.0.3",
     "react-dom": "^17.0.1",
-    "react-draggable": "^4.4.3",
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "styled-components": "^5.2.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
@@ -46,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.7"
   }
 }

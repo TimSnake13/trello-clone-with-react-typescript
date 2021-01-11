@@ -151,16 +151,15 @@ const TodoList = () => {
             <div key={d.idx} className="dropzone-wrapper">
               <div className="dropzone">
                 <h4 className="dropzone-title">{d.name}</h4>
-                {todos.map((t) =>
-                  t.dropzone === d.idx ? (
-                    <TodoItem
-                      key={t.id}
-                      todoItem={t}
-                      ToggleTodoItem={ToggleTodoItem}
-                    />
-                  ) : (
-                    <></>
-                  )
+                {todos.map(
+                  (t) =>
+                    t.dropzone === d.idx && (
+                      <TodoItem
+                        key={t.id}
+                        todoItem={t}
+                        ToggleTodoItem={ToggleTodoItem}
+                      />
+                    )
                 )}
               </div>
               <AddTodoForm addTodo={AddTodo} currentDropzone={d.idx} />
