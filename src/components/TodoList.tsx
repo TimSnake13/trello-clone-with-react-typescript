@@ -140,6 +140,8 @@ const TodoList = () => {
   }, [dropzones]);
   /*************** End Drag & Drop Functions  *****************/
 
+  const todoList = () => {};
+
   return (
     <div>
       <h3>Todos: </h3>
